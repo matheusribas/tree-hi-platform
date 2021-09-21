@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { GlobalStyle } from './styles/global'
+import { Container, Content, List } from './styles/components'
+import Item from './components/Item'
+
+import PerfectScrollbar from 'react-perfect-scrollbar'
+import 'react-perfect-scrollbar/dist/css/styles.css'
+
+const data = require('./api/data.json')
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Container>
+        <Content>
+          <PerfectScrollbar>
+            <List className="show">
+              {
+                Object.keys(data).map(item => <Item key={data[item].id} item={data[item]}/>)
+              }
+            </List>
+          </PerfectScrollbar>
+        </Content>
+      </Container>
+      <GlobalStyle />
+    </>
+  )
 }
 
-export default App;
+export default App
